@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: demo
+  name: service-demo
+spec:
+  ports:
+    - name: svc-port
+      port: 80 #Puerto expuesto en el cluster para el servicio
+      targetPort: pod-port #Puerto listener para llegar al servicio dentro del cluster (tiene que ser el mismo puerto que el que se encuentra expuesto en el container del pod)
+      protocol: TCP
+  type: NodePort
+  selector:
+    app: app-demo

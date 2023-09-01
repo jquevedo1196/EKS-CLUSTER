@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: demo
+  name: ingress-demo
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/success-codes: 200-499
+spec:
+  ingressClassName: alb
+  rules:
+    -  http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: service-demo
+              port:
+                name: svc-port

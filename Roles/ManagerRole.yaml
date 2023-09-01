@@ -1,0 +1,24 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: manager-TEST-CHALLENGE
+rules:
+- apiGroups: ["*"]
+  resources: ["deployments", "configmaps", "pods", "secrets", "services",
+              "namespaces", "ingresses", "events", "endpoints", "replicationcontrollers",
+              "daemonsets", "replicasets", "statefulsets", "horizontalpodautoscalers", "batch", "jobs",
+              "cronjobs", "pods/log", "pods/exec", "externalsecrets", "secretstores", "serviceaccounts"]
+  verbs: ["get", "watch", "list", "create", "apply", "patch", "describe", "delete"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: manager-TEST-CHALLENGE
+subjects:
+- kind: Group
+  name: manager-TEST-CHALLENGE
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: manager-TEST-CHALLENGE
+  apiGroup: rbac.authorization.k8s.io

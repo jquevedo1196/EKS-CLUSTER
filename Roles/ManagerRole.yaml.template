@@ -1,0 +1,24 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: ${GROUP_EKS}
+rules:
+- apiGroups: ["*"]
+  resources: ["deployments", "configmaps", "pods", "secrets", "services",
+              "namespaces", "ingresses", "events", "endpoints", "replicationcontrollers",
+              "daemonsets", "replicasets", "statefulsets", "horizontalpodautoscalers", "batch", "jobs",
+              "cronjobs", "pods/log", "pods/exec"]
+  verbs: ["get", "watch", "list", "create", "apply", "patch", "describe", "delete"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: ${GROUP_EKS}
+subjects:
+- kind: Group
+  name: ${GROUP_EKS}
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: ${GROUP_EKS}
+  apiGroup: rbac.authorization.k8s.io

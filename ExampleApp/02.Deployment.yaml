@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: demo
+  name: deployment-demo
+spec:
+  selector:
+    matchLabels:
+      app: app-demo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app-demo
+      annotations:
+        change-cause: "Desde kustomize con stages para prueba de equipo"
+    spec:
+      containers:
+      - image: nginx:latest
+        imagePullPolicy: Always
+        name: app-demo
+        resources:
+          requests:
+            cpu: "0.5"
+            memory: "1G"
+          limits:
+            cpu: "1"
+            memory: "2G"
+        ports:
+        - name: pod-port
+          containerPort: 80
